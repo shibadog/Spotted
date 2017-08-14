@@ -3,9 +3,18 @@
     "description": "test",
     "type": "project",
     "require": {
-        "silex/silex": "^2.2"
+        "silex/silex": "^2.2",
+        "symfony/form"       : "3.2.*",
+        "symfony/validator"  : "3.2.*",
+        "symfony/config"     : "3.2.*",
+        "symfony/translation": "3.2.*",
+        "symfony/intl"       : "3.2.*",
+        "symfony/twig-bridge": "3.2.*",
+        "monolog/monolog"    : "1.23.*",
+        "twig/twig"          : "2.4.*"
     },
     "require-dev": {
+        "clue/phar-composer": "1.0.*",
         "phpunit/phpunit": "^6.3",
         "squizlabs/php_codesniffer": "2.*",
         "phpmd/phpmd" : "2.*"
@@ -15,5 +24,17 @@
             "name": "shibadog",
             "email": "mischievous.dog00@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "Shibadog\\Spotted\\" : "src/main/php/",
+            "Shibadog\\Spotted\\Test\\" : "src/test/php"
+        }
+    },
+    "scripts" : {
+        "build": "php -d phar.readonly=off ./vendor/clue/phar-composer/bin/phar-composer build .",
+        "test": ".\\vendor\\bin\\phpunit -c src\\test\\resources\\phpunit.xml",
+        "run": "php -S localhost:8080 -t bin"
+    },
+    "bin": ["bin/index.php"]
 }
